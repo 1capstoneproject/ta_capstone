@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:ta_capstone/presentation/pages/home_screen.dart';
+import 'package:ta_capstone/presentation/pages/navigation.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 
 import '../../share/app_style/style.dart';
@@ -144,7 +145,7 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 OutlinedButton(
                   onPressed: () {
-                    Get.to(() => HomeScreen());
+                    Get.to(() => NavigationView());
                   },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(color: Colors.white), // Warna border
