@@ -18,9 +18,9 @@ class NavigationView extends GetView<NavigationController> {
           padding: const EdgeInsets.all(8),
           borderRadius: 25,
           itemBorderRadius: 25,
-          backgroundColor: AppColors.Blue400,
+          backgroundColor: AppColors.LightGreen500,
           selectedBackgroundColor: Colors.white,
-          selectedItemColor: AppColors.Blue400,
+          selectedItemColor: AppColors.LightGreen500,
           items: [
             FloatingNavbarItem(
               icon: Icons.home,

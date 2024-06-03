@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
-  static const Color Blue500 = Color(0xFF03AED2);
-  static const Color Blue400 = Color(0xFF29BAD9);
-  static const Color Blue300 = Color(0xFF4FC6DF);
-  static const Color Blue200 = Color(0xFF68CEE4);
-  static const Color Blue100 = Color(0xFF9ADFED);
+  static const Color LightGreen500 = Color(0xFF8BC342);
+  static const Color LightGreen400 = Color(0xFFA2CF68);
+  static const Color LightGreen300 = Color(0xFFB9DB8E);
+  static const Color LightGreen200 = Color(0xFFD1E7B3);
+  static const Color LightGreen100 = Color(0xFFE8F3D9);
 
   static const Color Orange500 = Color(0xFFFEB941);
   static const Color Orange400 = Color(0xFFFEC35E);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/splash_controller.dart';
-import 'package:ta_capstone/share/app_colors/colors.dart';
+
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     Get.put(SplashController());
     return Scaffold(
-      backgroundColor: AppColors.Blue500,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
               width: 150,
               height: 200,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
             CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
             ),

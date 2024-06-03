@@ -1,53 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:ta_capstone/presentation/pages/home_screen.dart';
+
 import 'package:ta_capstone/presentation/pages/navigation.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 
 import '../../share/app_style/style.dart';
-
 
 class OnboardingScreen extends StatelessWidget {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   @override
   Widget build(BuildContext context) {
-    const bodyStyle = TextStyle(fontSize: 16.0);
+    const bodyStyle = TextStyle(
+      fontSize: 16,
+      fontWeight: FontWeight.normal,
+      color: AppColors.black,
+    );
 
     const pageDecoration = PageDecoration(
-        titleTextStyle: TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700),
-        bodyTextStyle: bodyStyle,
-        bodyPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
-        imageAlignment: Alignment.bottomCenter,
-        pageMargin: const EdgeInsets.only(top: 25, bottom: 15),
-        pageColor: Colors.white,
-        imagePadding: EdgeInsets.zero,
-        imageFlex: 2);
+      titleTextStyle: TextStyle(
+        fontSize: 28,
+        fontWeight: FontWeight.bold,
+        color: AppColors.LightGreen500,
+      ),
+      bodyTextStyle: bodyStyle,
+      bodyPadding: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+      imageAlignment: Alignment.bottomCenter,
+      pageMargin: const EdgeInsets.only(top: 25, bottom: 15),
+      pageColor: Colors.white,
+      imagePadding: EdgeInsets.zero,
+      imageFlex: 2,
+    );
 
     return IntroductionScreen(
       key: introKey,
       globalBackgroundColor: Colors.white,
       pages: [
         _buildPageViewModel(
-          title: "Explore wonokitri",
+          title: "Jelajahi Wonokitri",
           body:
-          "Explore Wonokitri, enjoy the attractions and natural views and experience like a local",
-          imageName: 'On Boarding.png',
+              "Jelajahi Wonokitri, nikmati atraksi dan pemandangan alam serta rasakan pengalaman seperti warga lokal",
+          imageName: 'OnBoarding.png',
           pageDecoration: pageDecoration,
         ),
         _buildPageViewModel(
-          title: 'Tour Packages',
+          title: 'Nikmati Kemudahan',
           body:
-          "Enjoy the tour packages that have been provided and enjoy your trip",
-          imageName: 'On Boarding-1.png',
+              "Nikmati paket wisata yang telah disediakan dan nikmati perjalanan Anda",
+          imageName: 'OnBoarding-1.png',
           pageDecoration: pageDecoration,
         ),
         _buildPageViewModel(
           title: "Enjoy your trip",
           body:
-          " with natural and cultural tourism presented by the Wonokitri tourist village",
-          imageName: 'On Boarding-2.png',
+              " Nikmati kemudahan dalam memesan paket wisata yang telah disediakan",
+          imageName: 'OnBoarding-2.png',
           footer: _buildFooter(context),
           pageDecoration: pageDecoration,
         ),
@@ -57,12 +65,41 @@ class OnboardingScreen extends StatelessWidget {
       skipOrBackFlex: 0,
       nextFlex: 0,
       showBackButton: true,
-      back: const Text('Back',
-          style:
-          TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF03AED2))),
-      next: const Text('Next',
-          style:
-          TextStyle(fontWeight: FontWeight.w600, color: Color(0xFF03AED2))),
+      back: Container(
+        decoration: BoxDecoration(
+          color: AppColors.LightGreen500,
+          border: Border.all(
+            color: AppColors.LightGreen500,
+            width: 4.0,
+          ),
+          borderRadius:
+              BorderRadius.circular(5.0), // Optional: for rounded corners
+        ),
+        padding: EdgeInsets.all(8.0),
+        // Optional: for some padding inside the border
+        child: const Text(
+          'Back',
+          style: TextStyle(
+              fontWeight: FontWeight.w600, color: AppColors.LightGrey100),
+        ),
+      ),
+      next: Container(
+        decoration: BoxDecoration(
+          color: AppColors.LightGreen500,
+          border: Border.all(
+            color: AppColors.LightGreen500,
+            width: 2.0,
+          ),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        padding: EdgeInsets.all(8.0),
+        // Optional: for some padding inside the border
+        child: const Text(
+          'Next',
+          style: TextStyle(
+              fontWeight: FontWeight.w600, color: AppColors.LightGrey100),
+        ),
+      ),
       curve: Curves.fastLinearToSlowEaseIn,
       controlsMargin: const EdgeInsets.all(16),
       controlsPadding: const EdgeInsets.fromLTRB(8.0, 4.0, 8.0, 4.0),
@@ -70,7 +107,7 @@ class OnboardingScreen extends StatelessWidget {
         size: Size(8.0, 8.0),
         color: Color(0xFFBDBDBD),
         activeSize: Size(15.0, 5.0),
-        activeColor: Color(0xFF03AED2),
+        activeColor: AppColors.LightGreen500,
         activeShape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
@@ -108,12 +145,12 @@ class OnboardingScreen extends StatelessWidget {
               // Handle Google Sign In
             },
             style: ElevatedButton.styleFrom(
-              minimumSize: const Size.fromHeight(50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                side: BorderSide(color: AppColors.Blue500),
-              ),
-            ),
+                minimumSize: const Size.fromHeight(50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  side: BorderSide(color: AppColors.LightGreen500),
+                ),
+                backgroundColor: Colors.white),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -123,9 +160,9 @@ class OnboardingScreen extends StatelessWidget {
                 ),
                 SizedBox(width: 8.0),
                 const Text(
-                  'Sign in with Google',
+                  'Login Dengan Google',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: AppColors.LightGreen500,
                   ),
                 ),
               ],
@@ -148,11 +185,11 @@ class OnboardingScreen extends StatelessWidget {
                     Get.to(() => NavigationView());
                   },
                   style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Colors.white), // Warna border
+                    side: BorderSide(color: Colors.white),
                   ),
                   child: Text(
-                    'Continue as a guest',
-                    style: titleMediumBlue,
+                    'Lanjutkan Sebagai Tamu',
+                    style: labelLargeGreen,
                   ),
                 )
               ],
