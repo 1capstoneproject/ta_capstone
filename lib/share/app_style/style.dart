@@ -16,8 +16,6 @@ TextStyle titleMedium = GoogleFonts.roboto(
     fontSize: 14,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
-    height: 24,
-    letterSpacing: 0.15,
   ),
 );
 
@@ -44,7 +42,6 @@ TextStyle labelMedium = GoogleFonts.roboto(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: AppColors.black,
-    height: 16,
   ),
 );
 
@@ -114,6 +111,14 @@ TextStyle labelLargeGreen = GoogleFonts.roboto(
   ),
 );
 
+TextStyle labelMediumGreen = GoogleFonts.roboto(
+  textStyle: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
+    color: AppColors.LightGreen400,
+  ),
+);
+
 //white
 
 TextStyle titleLargeWhite = GoogleFonts.roboto(
@@ -123,7 +128,6 @@ TextStyle titleLargeWhite = GoogleFonts.roboto(
     color: AppColors.Green500,
   ),
 );
-
 
 TextStyle titleMediumWhite = GoogleFonts.roboto(
   textStyle: TextStyle(
@@ -138,7 +142,6 @@ TextStyle labelMediumWhite = GoogleFonts.roboto(
     fontSize: 12,
     fontWeight: FontWeight.normal,
     color: Colors.white,
-
   ),
 );
 
@@ -147,6 +150,14 @@ TextStyle titleMediumGrey = GoogleFonts.roboto(
   textStyle: TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
+    color: AppColors.DarkGrey300,
+  ),
+);
+
+TextStyle bodySmallGrey = GoogleFonts.roboto(
+  textStyle: TextStyle(
+    fontSize: 12,
+    fontWeight: FontWeight.normal,
     color: AppColors.DarkGrey300,
   ),
 );

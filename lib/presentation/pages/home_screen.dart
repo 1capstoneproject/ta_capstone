@@ -1,21 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/homepage_controller.dart';
+import 'package:ta_capstone/presentation/widget/carousel.dart';
+import 'package:ta_capstone/presentation/widget/cart_event.dart';
+import 'package:ta_capstone/presentation/widget/cart_wisata.dart';
+import 'package:ta_capstone/presentation/widget/cart_wisata_populer.dart';
 import 'package:ta_capstone/presentation/widget/search.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
+import '../../main.dart';
+
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late final HomeController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = Get.put(
+      HomeController(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -24,9 +39,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ClipPath(
                 clipper: HomeClipper(),
                 child: Container(
-                  height: 250, // Adjust the height as needed
-                  color: AppColors
-                      .LightGreen500, // Change this to any color or widget you want
+                  height: 250,
+                  color: AppColors.LightGreen500,
                 ),
               ),
               Padding(
@@ -40,18 +54,86 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Text(
-                      'Hi ${''}',
-                      style: titleMediumWhite,
-                    ),
-                    Text(
-                      'Ayo jelajahi Desa Wonokitri',
-                      style: labelMediumWhite,
+                    Column(
+                      children: [
+                        Header(name: 'name'),
+                      ],
                     ),
                     const SizedBox(
                       height: 10,
                     ),
-                    const TextFieldsearch(),
+                    TextFieldsearch(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    CarousleSlider(controller: controller),
+                    Text(
+                      'Event Mendatang',
+                      style: titleMedium,
+                    ),
+                    SizedBox(
+                      height: 240,
+                      child: ListView.builder(
+                          itemCount: 2,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CardEvent(
+                              image: 'image',
+                              title: 'title',
+                              price: 'price',
+                              date: 'date',
+                              location: 'location',
+                              controller: controller,
+                            );
+                          }),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Paket Wisata',
+                      style: titleMedium,
+                    ),
+                    SizedBox(
+                      height: 240,
+                      child: ListView.builder(
+                          itemCount: 2,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CardWisata(
+                              image: 'image',
+                              name: 'name',
+                              price: 'price',
+                              location: 'location',
+                              controller: controller,
+                            );
+                          }),
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    Text(
+                      'Wisata Populer',
+                      style: titleMedium,
+                    ),
+                    SizedBox(
+                        height: 50,
+                        child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 2,
+                              childAspectRatio: 1 / 1,
+                            ),
+                            itemBuilder: (context, index) {
+                              return CardWisataPopuler(
+                                image: 'image',
+                                name: 'name',
+                                location: 'location',
+                                controller: controller,
+                              );
+                            })),
                   ],
                 ),
               ),
@@ -80,5 +162,32 @@ class HomeClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+
+class Header extends StatelessWidget {
+  final String name;
+
+  const Header({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 10),
+          Text(
+            'Hi $name,',
+            style: titleMediumWhite,
+          ),
+          Text(
+            'Ayo jelajahi Desa Wonokitri',
+            style: labelMediumWhite,
+          ),
+        ]);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:ta_capstone/presentation/pages/detail_wisata.dart';
 
 import 'package:ta_capstone/presentation/pages/home_screen.dart';
 import 'package:ta_capstone/presentation/pages/navigation.dart';
@@ -35,4 +36,8 @@ final List<GetPage<dynamic>> routes = [
     name: navigation,
     page: () => NavigationView(),
   ),
+  GetPage(
+    name: detail_wisata,
+    page: () => DetailPaket(),
+  )
 ];
