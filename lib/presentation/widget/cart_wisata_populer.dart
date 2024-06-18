@@ -23,8 +23,8 @@ class CardWisataPopuler extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: SizedBox(
-        width: 50,
-        height: 50,
+        width: Get.width * 50,
+        height: Get.height * 60,
 
         // color: Colors.red,
         child: Card(
@@ -38,7 +38,7 @@ class CardWisataPopuler extends StatelessWidget {
                 children: [
                   Container(
                     width: Get.width * .6,
-                    height: Get.width * .3,
+                    height: Get.width * .4,
                     // color: Colors.red,
                     decoration: BoxDecoration(
                         image: DecorationImage(

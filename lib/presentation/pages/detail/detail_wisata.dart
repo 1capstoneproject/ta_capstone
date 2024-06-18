@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_capstone/presentation/controller/detail_paket_controller.dart';
 import 'package:ta_capstone/presentation/widget/icon_detail.dart';
+import 'package:ta_capstone/presentation/widget/text_detail.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
-class DetailPaket extends StatelessWidget {
-  const DetailPaket({super.key});
+class DetailWisata extends StatelessWidget {
+  const DetailWisata({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +16,7 @@ class DetailPaket extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Detail Wisata',
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(color: Colors.black),
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: titleLarge,
         ),
         leading: const BackButton(),
         backgroundColor: Colors.transparent,
@@ -91,73 +87,18 @@ class DetailPaket extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 10),
                 const IconDetail(),
-                const SizedBox(height: 20),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Informasi Detail',
-                            style: labelMedium,
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            '',
-                            style: bodySmallGrey,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                TextDetail(
+                  title: 'Informasi Detail',
+                  detail: '',
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Harap Diperhatikan',
-                            style: labelMedium,
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            '',
-                            style: bodySmallGrey,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                TextDetail(
+                  title: 'Harap Diperhatikan',
+                  detail: '',
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Informasi Tambahan',
-                            style: labelMedium,
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            '',
-                            style: bodySmallGrey,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                TextDetail(
+                  title: 'Informasi Tambahan',
+                  detail: '',
                 ),
               ],
             ),

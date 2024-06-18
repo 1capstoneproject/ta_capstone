@@ -7,7 +7,7 @@ import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 import '../controller/homepage_controller.dart';
-import '../pages/detail_wisata.dart';
+import '../pages/detail/detail_wisata.dart';
 
 class CardEvent extends StatelessWidget {
   const CardEvent({
@@ -33,7 +33,7 @@ class CardEvent extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: ((context) {
-          return const DetailPaket();
+          return const DetailWisata();
         })));
       },
       child: SizedBox(

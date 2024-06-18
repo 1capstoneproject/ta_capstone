@@ -7,7 +7,6 @@ TextStyle titleLarge = GoogleFonts.roboto(
     fontSize: 16,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
-    height: 28,
   ),
 );
 
@@ -24,8 +23,6 @@ TextStyle titleSmall = GoogleFonts.roboto(
     fontSize: 12,
     fontWeight: FontWeight.bold,
     color: AppColors.black,
-    height: 20,
-    letterSpacing: 0.1,
   ),
 );
 
@@ -83,7 +80,7 @@ TextStyle titleLargeGreen = GoogleFonts.roboto(
   textStyle: TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.bold,
-    color: AppColors.Green500,
+    color: AppColors.LightGreen400,
   ),
 );
 
@@ -91,7 +88,7 @@ TextStyle titleMediumGreen = GoogleFonts.roboto(
   textStyle: TextStyle(
     fontSize: 14,
     fontWeight: FontWeight.bold,
-    color: AppColors.Green500,
+    color: AppColors.LightGreen400,
   ),
 );
 
@@ -99,7 +96,7 @@ TextStyle titleSmallGreen = GoogleFonts.roboto(
   textStyle: TextStyle(
     fontSize: 12,
     fontWeight: FontWeight.bold,
-    color: AppColors.Green500,
+    color: AppColors.LightGreen400,
   ),
 );
 

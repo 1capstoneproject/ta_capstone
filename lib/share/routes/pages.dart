@@ -1,15 +1,15 @@
 import 'package:get/get.dart';
-import 'package:ta_capstone/presentation/pages/detail_wisata.dart';
+import 'package:ta_capstone/presentation/pages/detail/detail_wisata.dart';
 
-import 'package:ta_capstone/presentation/pages/home_screen.dart';
-import 'package:ta_capstone/presentation/pages/navigation.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/home_screen.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
 import 'package:ta_capstone/presentation/pages/onboarding.dart';
 
 import 'package:ta_capstone/share/routes/constant.dart';
 
-import '../../presentation/pages/account_screen.dart';
+import '../../presentation/pages/dashboard/account_screen.dart';
 import '../../presentation/pages/splash_screen.dart';
-import '../../presentation/pages/transaction_screen.dart';
+import '../../presentation/pages/dashboard/transaction_screen.dart';
 
 final List<GetPage<dynamic>> routes = [
   GetPage(
@@ -38,6 +38,6 @@ final List<GetPage<dynamic>> routes = [
   ),
   GetPage(
     name: detail_wisata,
-    page: () => DetailPaket(),
+    page: () => DetailWisata(),
   )
 ];

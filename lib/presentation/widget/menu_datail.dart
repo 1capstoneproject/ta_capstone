@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:ta_capstone/share/app_colors/colors.dart';
+import 'package:ta_capstone/share/app_style/style.dart';
 
 class MenuDetail extends StatelessWidget {
   final String title;
@@ -20,16 +21,13 @@ class MenuDetail extends StatelessWidget {
           children: [
             Icon(
               menuIcon,
-              color: Color(0xFF8BC342),
+              color: AppColors.DarkGrey300,
+              size: 15,
             ),
             SizedBox(width: 8),
             Text(
               title,
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(color: Colors.black),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+              style: bodySmallGrey,
             ),
           ],
         ),

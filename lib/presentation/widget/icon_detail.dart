@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
-class IconDetail extends StatefulWidget {
+class IconDetail extends StatelessWidget {
   const IconDetail({super.key});
 
   @override
-  State<IconDetail> createState() => _IconDetailState();
-}
-
-class _IconDetailState extends State<IconDetail> {
-  bool isSaved = false;
-
-  @override
   Widget build(BuildContext context) {
+    bool isSaved = false;
     return Row(
       children: [
         Text(
@@ -26,7 +18,7 @@ class _IconDetailState extends State<IconDetail> {
           onTap: () {},
           child: Icon(
             Icons.share,
-            color: AppColors.LightGreen500,
+            color: Colors.black,
           ),
         ),
       ],
