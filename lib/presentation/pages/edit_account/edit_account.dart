@@ -15,7 +15,10 @@ class EditAccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Account', style: titleLarge),
+        title: Text(
+          'Pengaturan Akun',
+          style: titleLarge,
+        ),
         centerTitle: true,
         actions: [
           IconButton(

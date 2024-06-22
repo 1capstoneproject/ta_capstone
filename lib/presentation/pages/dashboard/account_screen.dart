@@ -19,7 +19,7 @@ class AccountScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
         title: Text(
-          'Account',
+          'Profil Saya',
           style: titleLarge,
         ),
         centerTitle: true,
