@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
+import 'package:ta_capstone/share/routes/new.dart';
 
 import '../controller/homepage_controller.dart';
-import '../pages/detail/detail_wisata.dart';
 
 class CardEvent extends StatelessWidget {
   const CardEvent({
@@ -32,9 +32,12 @@ class CardEvent extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: ((context) {
-          return const DetailWisata();
-        })));
+        Get.to(AppRoute.widget['Detail Wisata'], arguments: {
+          'nama': 'Detail Wisata',
+        });
+        //Navigator.push(context, MaterialPageRoute(builder: ((context) {
+        //return const DetailWisata();
+        //}))); //add to route with Get.toNamed()
       },
       child: SizedBox(
         width: Get.width * .65,

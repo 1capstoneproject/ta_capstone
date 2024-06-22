@@ -1,3 +1,3 @@
 import 'package:get/get.dart';
 
-class TransactionController extends GetxController {}
+class KeranjangController extends GetxController {}

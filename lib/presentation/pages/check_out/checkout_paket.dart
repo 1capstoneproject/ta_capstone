@@ -92,8 +92,10 @@ class CartWidget extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
                   child: CartCheckout(
                     title: 'longlivia',
                     date: '1 hari',

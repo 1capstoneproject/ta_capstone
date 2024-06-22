@@ -9,6 +9,7 @@ import 'package:ta_capstone/presentation/widget/search.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
+//ini ntar di ubah ke stateless
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 

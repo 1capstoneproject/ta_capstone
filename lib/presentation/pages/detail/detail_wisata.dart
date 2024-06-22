@@ -15,7 +15,8 @@ class DetailWisata extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Detail Wisata',
+          Get.arguments['nama'],
+          //'Detail Wisata',
           style: titleLarge,
         ),
         leading: const BackButton(),

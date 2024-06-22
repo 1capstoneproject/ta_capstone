@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/splash_controller.dart';
+import 'package:ta_capstone/share/app_colors/colors.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
@@ -19,7 +20,9 @@ class SplashScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
             CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                AppColors.LightGreen500,
+              ),
             ),
           ],
         ),

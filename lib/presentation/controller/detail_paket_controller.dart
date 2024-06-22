@@ -22,4 +22,11 @@ class DetailPaketController extends GetxController {
   void terapkan() {
     print("Tombol Terapkan");
   }
+
+  //qr.code
+  var qrData = ''.obs;
+
+  void updateQrData(String data) {
+    qrData.value = data;
+  }
 }

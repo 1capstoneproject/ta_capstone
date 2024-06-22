@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/share/routes/constant.dart';
@@ -17,8 +16,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      getPages: routes,
-      initialRoute: splashscreen,
+      //getPages: routes,
+      //initialRoute: splashscreen,
+      getPages: AppRoute.Route,
+      initialRoute: AppRoute.splashscreen,
     );
   }
 }
