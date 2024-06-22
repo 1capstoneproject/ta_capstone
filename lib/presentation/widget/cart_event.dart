@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
-import 'package:ta_capstone/share/routes/new.dart';
+import 'package:ta_capstone/share/routes/route.dart';
 
 import '../controller/homepage_controller.dart';
 

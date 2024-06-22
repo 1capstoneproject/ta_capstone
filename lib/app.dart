@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ta_capstone/share/routes/constant.dart';
-import 'package:ta_capstone/share/routes/pages.dart';
+import 'package:ta_capstone/share/routes/route.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

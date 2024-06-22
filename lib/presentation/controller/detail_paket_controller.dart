@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
+import 'package:ta_capstone/presentation/controller/transaction_controller.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/keranjang_screen.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
 
 class DetailPaketController extends GetxController {
   var selectedImageIndex = 0.obs;
@@ -16,6 +19,7 @@ class DetailPaketController extends GetxController {
   }
 
   void handleSecondaryButtonPress() {
+    Get.to(() => KeranjangScreen());
     print("Secondary button pressed");
   }
 
