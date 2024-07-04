@@ -34,8 +34,8 @@ class CardWisata extends StatelessWidget {
         })));
       },
       child: SizedBox(
-        width: Get.width * .65,
-        height: 240,
+        width: Get.width * .60,
+        height: Get.height * .20,
         child: Card(
           elevation: 7,
           child: Container(

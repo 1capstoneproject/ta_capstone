@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
@@ -6,13 +7,17 @@ import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:intl_phone_field/intl_phone_field.dart'; // Import intl_phone_field package
 import '../../controller/account_controller.dart';
 
-import '../dashboard/account_screen.dart'; // Assuming the file path to AccountScreen
+// Assuming the file path to AccountScreen
 
 class EditAccountScreen extends StatelessWidget {
   final AccountController accountController = Get.find();
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: const Size(360, 690),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -48,10 +53,10 @@ class EditAccountScreen extends StatelessWidget {
                   alignment: Alignment.bottomRight,
                   children: [
                     CircleAvatar(
-                      radius: 50,
+                      radius: 50.sp,
                       backgroundImage: accountController.image.value != null
                           ? FileImage(accountController.image.value!)
-                          : AssetImage('assets/images/default_avatar.png')
+                          : AssetImage('assets/images/profil.png')
                               as ImageProvider,
                     ),
                     Positioned(

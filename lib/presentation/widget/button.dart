@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 class ButtonComponent extends StatelessWidget {
@@ -22,7 +23,7 @@ class ButtonComponent extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width - 50,
-        height: 54,
+        height: 54.sp,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),

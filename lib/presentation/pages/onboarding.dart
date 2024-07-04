@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:ta_capstone/presentation/controller/onboarding_controller.dart';
 
 import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
+
+import 'package:ta_capstone/service/api.dart';
+
 import 'package:ta_capstone/share/app_colors/colors.dart';
 
 import '../../share/app_style/style.dart';
 
 class OnboardingScreen extends StatelessWidget {
+  Future<void> initServices() async {
+    Get.putAsync(() => ApiServices().init());
+  }
+
   final introKey = GlobalKey<IntroductionScreenState>();
+  final OnboardingController _onboardingController =
+      Get.put(OnboardingController());
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +81,7 @@ class OnboardingScreen extends StatelessWidget {
           color: AppColors.LightGreen500,
           border: Border.all(
             color: AppColors.LightGreen500,
-            width: 4.0,
+            width: 4.0.sp,
           ),
           borderRadius:
               BorderRadius.circular(5.0), // Optional: for rounded corners
@@ -88,7 +99,7 @@ class OnboardingScreen extends StatelessWidget {
           color: AppColors.LightGreen500,
           border: Border.all(
             color: AppColors.LightGreen500,
-            width: 2.0,
+            width: 2.0.sp,
           ),
           borderRadius: BorderRadius.circular(5.0),
         ),
@@ -142,7 +153,8 @@ class OnboardingScreen extends StatelessWidget {
         children: [
           ElevatedButton(
             onPressed: () {
-              // Handle Google Sign In
+              _onboardingController.handleSignIn();
+              //Get.to(LoginPage());
             },
             style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(50),

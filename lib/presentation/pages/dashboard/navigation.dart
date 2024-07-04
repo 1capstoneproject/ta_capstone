@@ -1,6 +1,6 @@
-
 import 'package:floating_bottom_navigation_bar/floating_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/navigation_controller.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
@@ -10,10 +10,14 @@ class NavigationView extends GetView<NavigationController> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: const Size(360, 690),
+    );
     Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
-            () => FloatingNavbar(
+        () => FloatingNavbar(
           margin: const EdgeInsets.all(0),
           padding: const EdgeInsets.all(8),
           borderRadius: 25,
@@ -40,7 +44,7 @@ class NavigationView extends GetView<NavigationController> {
         ),
       ),
       body: Obx(
-            () => controller.screens[controller.selectedIndex.value],
+        () => controller.screens[controller.selectedIndex.value],
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
@@ -23,8 +24,8 @@ class CardWisataPopuler extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: SizedBox(
-        width: Get.width * 50,
-        height: Get.height * 60,
+        width: Get.width * 50.sp,
+        height: Get.height * 60.sp,
 
         // color: Colors.red,
         child: Card(
@@ -37,8 +38,8 @@ class CardWisataPopuler extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: Get.width * .6,
-                    height: Get.width * .4,
+                    width: Get.width * .4,
+                    height: Get.width * .2,
                     // color: Colors.red,
                     decoration: BoxDecoration(
                         image: DecorationImage(
@@ -65,7 +66,7 @@ class CardWisataPopuler extends StatelessWidget {
                         children: [
                           Icon(
                             Icons.date_range_outlined,
-                            size: 15,
+                            size: 15.sp,
                             color: Colors.grey,
                           ),
                           SizedBox(width: 8),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
@@ -27,13 +28,13 @@ class Ticketing extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 2,
-              height: 150,
+              height: 150.sp,
               child: CartWidget(),
             ),
             Container(
               margin: EdgeInsets.only(
-                left: 25,
-                top: 15,
+                left: 25.sp,
+                top: 15.sp,
               ),
               alignment: Alignment.centerLeft,
               child: Text(
@@ -79,7 +80,7 @@ class Ticketing extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: ButtonComponent(
-            title: 'Beli Sekarang',
+            title: 'Cek Status',
             onPressed: () {
               Get.to(
                 () => CetakTiket(),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ta_capstone/share/app_style/style.dart';
 
 class KotakDetail extends StatelessWidget {
   final String title;
@@ -15,8 +17,8 @@ class KotakDetail extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 50,
-          width: 100,
+          height: 50.h,
+          width: 100.w,
           decoration: BoxDecoration(
             color: Color(0xFf8bC342),
             borderRadius: BorderRadius.circular(8), // Radius border
@@ -24,11 +26,7 @@ class KotakDetail extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-              style: GoogleFonts.inter(
-                textStyle: TextStyle(color: Colors.white),
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-              ),
+              style: titleMedium,
             ),
           ),
         ),

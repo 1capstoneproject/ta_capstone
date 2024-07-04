@@ -30,10 +30,10 @@ class AccountController extends GetxController {
   @override
   void onInit() {
     // Mengambil data saat ini untuk ditampilkan di form
-    fullNameController.text = fullName.value ?? '';
-    phoneController.text = phoneNumber.value ?? '';
-    emailController.text = email.value ?? '';
-    addressController.text = address.value ?? '';
+    fullNameController.text = fullName.value;
+    phoneController.text = phoneNumber.value;
+    emailController.text = email.value;
+    addressController.text = address.value;
     super.onInit();
   }
 

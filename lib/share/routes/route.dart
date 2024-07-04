@@ -9,9 +9,11 @@ import '../../presentation/pages/detail/detail_wisata.dart';
 import '../../presentation/pages/onboarding.dart';
 import '../../presentation/pages/splash_screen.dart';
 
+import '../../presentation/controller/homepage_controller.dart'; // Import HomeController
+
 class AppRoute {
-  static const splashscreen = '/';
-  static const onboarding = '/onboarding';
+  static const String splashscreen = '/';
+  static const String onboarding = '/onboarding';
   static const String login = '/login';
   static const String homescreen = '/homescreen';
   static const String keranjangscreen = '/keranjangscreen';
@@ -23,7 +25,7 @@ class AppRoute {
   static const String pembayaran = '/pembayaran';
   static const String ticketing = '/ticketing';
 
-  static List<GetPage> get Route => [
+  static List<GetPage> get routes => [
         GetPage(
           name: splashscreen,
           page: () => SplashScreen(),
@@ -51,7 +53,7 @@ class AppRoute {
         GetPage(
           name: detail_wisata,
           page: () => DetailWisata(),
-        )
+        ),
       ];
 
   static Map<String, Widget Function()> get widget => {

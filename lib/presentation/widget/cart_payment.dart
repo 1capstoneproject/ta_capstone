@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 class CartPayment extends StatelessWidget {
@@ -19,29 +19,41 @@ class CartPayment extends StatelessWidget {
         top: 10,
         right: 20,
       ),
-      child: Row(
-        children: [
-          Container(
-            width: Get.width * 0.2,
-            height: Get.width * 0.1,
-            // color: Colors.red,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      img,
-                    ),
-                    fit: BoxFit.contain),
-                borderRadius: BorderRadius.circular(5)),
+      child: Card(
+        elevation: 0.5,
+        child: Container(
+          color: Colors.white,
+          child: Row(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                  left: 15,
+                ),
+                width: 70.sp,
+                height: 60.sp,
+                // color: Colors.red,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          img,
+                        ),
+                        fit: BoxFit.contain),
+                    borderRadius: BorderRadius.circular(5)),
+              ),
+              Spacer(),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Text(
+                  name,
+                  style: labelSmall,
+                ),
+              ),
+            ],
           ),
-          Spacer(),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            name,
-            style: labelMedium,
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -1,12 +1,21 @@
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/pages/onboarding.dart';
+import 'package:ta_capstone/service/services.dart';
 
 class SplashController extends GetxController {
+  final SharedPreferencesService sharedPreferences =
+      Get.put(SharedPreferencesService());
   @override
   void onInit() async {
     super.onInit();
     //_navigateToSplash();
     print("Navigating to Home in 3 seconds");
+    print(sharedPreferences.sessionUserIdKey);
+    //sharedPreferences.sessionUserIdKey = 1000000;
+    print(sharedPreferences.sessionUserPassword);
+    //sharedPreferences.sessionUserPassword = "LogPass17";
+    sharedPreferences.clear();
+
     await Future.delayed(Duration(seconds: 5));
     Get.offAll(() => OnboardingScreen());
   }

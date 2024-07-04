@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
 import 'package:ta_capstone/presentation/pages/ticket/ticket.dart';
@@ -26,8 +27,8 @@ class Pembayaran extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width * 2,
-              height: 150,
+              width: MediaQuery.of(context).size.width * 2.sp,
+              height: 150.sp,
               child: CartWidget(),
             ),
             Container(
@@ -42,14 +43,14 @@ class Pembayaran extends StatelessWidget {
                 children: [
                   Text(
                     'Data Pesanan',
-                    style: titleMedium,
+                    style: titleSmall,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   TextDp(
                     title: 'Nama Pemesanan',
-                    data: 'Akhmad Aldi',
+                    data: 'Data',
                   ),
                   TextDp(
                     title: 'Kategori',
@@ -65,32 +66,35 @@ class Pembayaran extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                      top: 10,
-                      right: 20,
+                      top: 10.sp,
+                      right: 20.sp,
                     ),
                     child: Row(
                       children: [
                         Text(
                           'Total',
-                          style: bodyMedium,
+                          style: labelMedium,
                         ),
                         Spacer(),
                         SizedBox(
-                          height: 8,
+                          height: 8.sh,
                         ),
                         Text(
                           'data',
-                          style: titleSmallGreen,
+                          style: labelMediumGreen,
                         ),
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: 8.sh,
                   ),
                   const ButtonTotal(
                     title: '',
                     decs: 'Terapkan',
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.sh,
                   ),
                   Text(
                     'Metode Pembayaran',
@@ -174,7 +178,7 @@ class TextDp extends StatelessWidget {
           ),
           Spacer(),
           SizedBox(
-            height: 8,
+            height: 8.sh,
           ),
           Text(
             data,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import 'package:ta_capstone/presentation/pages/check_out/data_diri.dart';
@@ -11,9 +12,6 @@ class DaftarTiket extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool _homeStay = false;
-
-    bool _fotoGrafer = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -27,7 +25,7 @@ class DaftarTiket extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 2,
-              height: 150,
+              height: 150.sp,
               child: CartWidget(),
             ),
             SizedBox(height: 8),
@@ -77,8 +75,8 @@ class CartWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                width: 100,
-                height: 100,
+                width: 100.w,
+                height: 100.h,
                 decoration: BoxDecoration(
                   color: Colors.black,
                   image: DecorationImage(
@@ -149,20 +147,20 @@ class _SelectTanggalState extends State<SelectTanggal> {
           children: [
             Text(
               'Pilih Tanggal',
-              style: titleMediumGrey,
+              style: titleSmall,
             ),
             SizedBox(
               height: 7,
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 10,
+                vertical: 5.sp,
+                horizontal: 10.sp,
               ),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
-                  width: 1.0,
+                  width: 1.0.w,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -220,15 +218,15 @@ class _JumlahOrangState extends State<JumlahOrang> {
           children: [
             Text(
               'Jumlah Orang',
-              style: titleMediumGrey,
+              style: titleSmall,
             ),
             SizedBox(
               height: 7,
             ),
             Container(
               padding: EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 10,
+                vertical: 5.sp,
+                horizontal: 10.sp,
               ),
               decoration: BoxDecoration(
                 border: Border.all(
@@ -283,15 +281,15 @@ class CartCheckout extends StatelessWidget {
       children: [
         Text(
           title,
-          style: titleMedium,
+          style: titleSmall,
         ),
         Text(
           date,
-          style: titleMediumGrey,
+          style: bodySmallGrey,
         ),
         Text(
           price,
-          style: titleMediumGreen,
+          style: titleSmallGreen,
         ),
       ],
     );

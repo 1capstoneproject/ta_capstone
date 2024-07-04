@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
@@ -13,6 +14,10 @@ class DataDiri extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: const Size(360, 690),
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +31,7 @@ class DataDiri extends StatelessWidget {
           children: [
             SizedBox(
               width: MediaQuery.of(context).size.width * 2,
-              height: 150,
+              height: 150.sp,
               child: CartWidget(),
             ),
             TextDr(),
@@ -37,9 +42,15 @@ class DataDiri extends StatelessWidget {
               title: 'Nama Kelompok',
               hidetitle: 'nama kelompok',
             ),
+            SizedBox(
+              height: 10,
+            ),
             CustomTextField(
               title: 'Email',
               hidetitle: 'email',
+            ),
+            SizedBox(
+              height: 10,
             ),
             Customphone(
               title: 'Nomor Hp Kelompok',
@@ -135,7 +146,7 @@ class CustomTextField extends StatelessWidget {
         children: <Widget>[
           Text(
             title,
-            style: titleMedium,
+            style: titleSmall,
           ),
           const SizedBox(height: 8),
           TextField(
@@ -185,7 +196,7 @@ class TextDr extends StatelessWidget {
         children: [
           Text(
             'Data Diri',
-            style: titleMedium,
+            style: titleSmall,
           ),
           Text(
             'Masukkan data diri dari kelompok anda',

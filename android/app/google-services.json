@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "453247308468",
+    "project_id": "wonokitri-tourism",
+    "storage_bucket": "wonokitri-tourism.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453247308468:android:35f4e0ecdbf792346fbde1",
+        "android_client_info": {
+          "package_name": "com.example.ta_capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453247308468-d1nhukc0fet9dg442a7oaa15fve6p39o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ta_capstone",
+            "certificate_hash": "3563467b2131927f8d82c4d11629d8ace26420ec"
+          }
+        },
+        {
+          "client_id": "453247308468-1rq1ea6qr9mho1ag24la5g8av43l6rl8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB45kko7CZnachkE5gswZW_O5Be1sUwcDo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453247308468-1rq1ea6qr9mho1ag24la5g8av43l6rl8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

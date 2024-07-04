@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/detail_paket_controller.dart';
 import 'package:ta_capstone/presentation/widget/icon_detail.dart';
@@ -34,8 +35,8 @@ class DetailWisata extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Obx(() => Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      height: MediaQuery.of(context).size.height * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.9.sp,
+                      height: MediaQuery.of(context).size.height * 0.3.sp,
                       decoration: BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(controller
@@ -47,7 +48,7 @@ class DetailWisata extends StatelessWidget {
                     )),
                 const SizedBox(height: 10),
                 Container(
-                  height: 60,
+                  height: 60.h,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: controller.catPaket.length,
@@ -78,8 +79,8 @@ class DetailWisata extends StatelessWidget {
                             ),
                             child: Image.network(
                               controller.catPaket[index],
-                              width: 50,
-                              height: 50,
+                              width: 50.w,
+                              height: 50.h,
                               fit: BoxFit.fill,
                             ),
                           ),

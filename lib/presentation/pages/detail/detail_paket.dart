@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/detail_paket_controller.dart';
 import 'package:ta_capstone/presentation/widget/icon_detail.dart';
@@ -58,7 +59,7 @@ class _DetailPaketState extends State<DetailPaket> {
                     )),
                 const SizedBox(height: 10),
                 Container(
-                  height: 60,
+                  height: 60.sp,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: controller.catPaket.length,
@@ -76,7 +77,7 @@ class _DetailPaketState extends State<DetailPaket> {
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                width: 1,
+                                width: 1.w,
                                 color:
                                     index == controller.selectedImageIndex.value
                                         ? const Color(0xFF8BC342)
@@ -86,8 +87,8 @@ class _DetailPaketState extends State<DetailPaket> {
                             ),
                             child: Image.network(
                               controller.catPaket[index],
-                              width: 50,
-                              height: 50,
+                              width: 50.w,
+                              height: 50.h,
                               fit: BoxFit.fill,
                             ),
                           ),

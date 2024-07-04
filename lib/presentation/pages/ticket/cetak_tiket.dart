@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/pages/dashboard/home_screen.dart';
 import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
@@ -21,7 +22,7 @@ class CetakTiket extends StatelessWidget {
           ClipPath(
             clipper: HomeClipper(),
             child: Container(
-              height: 250,
+              height: 250.sp,
               color: AppColors.LightGreen500,
             ),
           ),
@@ -29,7 +30,7 @@ class CetakTiket extends StatelessWidget {
             child: SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.only(
-                  top: 70,
+                  top: 70.sp,
                 ),
                 child: Column(
                   children: [
@@ -47,8 +48,8 @@ class CetakTiket extends StatelessWidget {
                           elevation: 10,
                           borderRadius: BorderRadius.circular(16),
                           child: TicketWidget(
-                            width: 300,
-                            height: 500,
+                            width: 300.sp,
+                            height: 500.sp,
                             isCornerRounded: true,
                             padding: EdgeInsets.all(20),
                             child: TicketData(),
@@ -69,8 +70,46 @@ class CetakTiket extends StatelessWidget {
           child: ButtonComponent(
             title: 'Download E - Ticket',
             onPressed: () {
-              Get.to(
-                () => NavigationView(),
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset(
+                            'assets/images/ticketpopup.png'), // Replace with your image path
+                        SizedBox(height: 10.sp),
+                        Text(
+                          'Ticket Berhasil Disimpan',
+                          style: titleMedium,
+                        ),
+                        SizedBox(height: 10.sp),
+                        Text(
+                          'E-ticket anda berhasil Disimpan di perangkat anda',
+                          style: bodyMedium,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        child: Text('Batal'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      TextButton(
+                        child: Text('Unduh'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          Get.to(() => NavigationView());
+                          // Add your download logic here
+                        },
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
@@ -98,7 +137,7 @@ class TicketData extends StatelessWidget {
                   'Longlivia Bromo',
                   style: titleLarge,
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.sp),
                 Text(
                   'ID Wisata: 123456',
                   style: bodySmallGrey,
@@ -113,8 +152,8 @@ class TicketData extends StatelessWidget {
 
               //barcode masih belum muncul,
               child: Container(
-                width: 60.0,
-                height: 60.0,
+                width: 60.0.sp,
+                height: 60.0.sp,
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.black),
                   borderRadius: BorderRadius.circular(8),
@@ -128,12 +167,17 @@ class TicketData extends StatelessWidget {
         Divider(
           color: AppColors.LightGreen200,
         ),
-        SizedBox(height: 20),
-        Text(
-          'Data Pesanan',
-          style: titleLarge,
+        SizedBox(height: 20.sp),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Data Pesanan',
+              style: titleLarge,
+            ),
+          ],
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 10.sp),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -147,7 +191,7 @@ class TicketData extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 8.sp),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -161,7 +205,7 @@ class TicketData extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 8.sp),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -175,7 +219,7 @@ class TicketData extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        SizedBox(height: 8.sp),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -189,17 +233,20 @@ class TicketData extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 15.sp),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Text(
+              'Metode pembayaran QRIS',
+              style: titleLarge,
+            ),
+          ],
+        ),
         Divider(
           color: AppColors.LightGreen200,
         ),
-        SizedBox(height: 15),
-        Text(
-          'Metode pembayaran QRIS',
-          style: titleLarge,
-          textAlign: TextAlign.center,
-        ),
-        SizedBox(height: 10),
+        SizedBox(height: 10.sp),
         Text(
           'Tanggal',
           style: bodySmall,
@@ -211,7 +258,7 @@ class TicketData extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         SizedBox(
-          height: 8,
+          height: 8.sp,
         ),
         Text(
           'Datang sesuai jadwal dan tunjukan tiket ini ke pokdarwis',
@@ -219,7 +266,7 @@ class TicketData extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         SizedBox(
-          height: 8,
+          height: 8.sp,
         ),
         Text(
           'Rp. 0.000.000',
@@ -230,6 +277,3 @@ class TicketData extends StatelessWidget {
     );
   }
 }
-
-
-//pop up untuk tiket berhasil di simpan/di download masih belum di tambahkan.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/pages/edit_account/edit_account.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
@@ -10,6 +11,10 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: const Size(360, 690),
+    );
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -33,7 +38,10 @@ class AccountScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.symmetric(
+          vertical: 20.sp,
+          horizontal: 20.sp,
+        ),
         children: [
           Center(
             child: Obx(() {
@@ -41,10 +49,11 @@ class AccountScreen extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children: [
                   CircleAvatar(
-                    radius: 50,
+                    radius: 50.sp,
                     backgroundImage: accountController.image.value != null
                         ? FileImage(accountController.image.value!)
-                        : AssetImage('assets/images/Ovo.png') as ImageProvider,
+                        : AssetImage('assets/images/profil.png')
+                            as ImageProvider,
                   ),
                 ],
               );
