@@ -155,7 +155,7 @@ class HomeScreen extends GetView<HomeController> {
   Future<List<dynamic>> fetchData() async {
     try {
       var dio = Dio();
-      var response = await dio.get('http://192.168.42.217//api/event.php');
+      var response = await dio.get('http://192.168.42.88//api/event.php');
       if (response.statusCode == 200) {
         print(response.statusCode);
         return response.data;

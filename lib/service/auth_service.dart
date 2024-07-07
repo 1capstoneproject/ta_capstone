@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,17 +21,13 @@ class AuthService extends GetxService {
   }
   // hp colokin
 
-  Future<void> googleSignIn() async {
+  Future<GoogleSignInAccount?> googleSignIn() async {
     try {
       final credentials = await _googleSignIn.signIn();
-      print({
-        'name': credentials?.displayName,
-        'email': credentials?.email,
-        'profile': credentials?.photoUrl,
-        'gid': credentials?.id,
-      });
+      return credentials;
     } catch (e) {
       Get.printError(info: e.toString());
+      return null;
     }
   }
 }
