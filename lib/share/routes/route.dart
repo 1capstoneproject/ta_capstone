@@ -1,15 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
-
-import '../../presentation/pages/dashboard/account_screen.dart';
-import '../../presentation/pages/dashboard/home_screen.dart';
-import '../../presentation/pages/dashboard/keranjang_screen.dart';
-import '../../presentation/pages/dashboard/navigation.dart';
-import '../../presentation/pages/detail/detail_wisata.dart';
-import '../../presentation/pages/onboarding.dart';
-import '../../presentation/pages/splash_screen.dart';
-
-import '../../presentation/controller/homepage_controller.dart'; // Import HomeController
+import 'package:ta_capstone/presentation/pages/detail/detail.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/account_screen.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/keranjang_screen.dart';
+import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
+import 'package:ta_capstone/presentation/pages/onboarding.dart';
+import 'package:ta_capstone/presentation/pages/splash_screen.dart';
 
 class AppRoute {
   static const String splashscreen = '/';
@@ -19,8 +14,7 @@ class AppRoute {
   static const String keranjangscreen = '/keranjangscreen';
   static const String accountscreen = '/accountscreen';
   static const String navigation = '/navigation';
-  static const String detail_wisata = '/detailwisata';
-  static const String detail_paket = '/detailpaket';
+  static const String detail = '/detail';
   static const String beli_paket = '/belipaket';
   static const String pembayaran = '/pembayaran';
   static const String ticketing = '/ticketing';
@@ -36,7 +30,7 @@ class AppRoute {
         ),
         GetPage(
           name: homescreen,
-          page: () => HomeScreen(),
+          page: () => NavigationView(),
         ),
         GetPage(
           name: keranjangscreen,
@@ -51,12 +45,8 @@ class AppRoute {
           page: () => NavigationView(),
         ),
         GetPage(
-          name: detail_wisata,
-          page: () => DetailWisata(),
+          name: detail,
+          page: () => DetailScreen(),
         ),
       ];
-
-  static Map<String, Widget Function()> get widget => {
-        'Detail Wisata': () => DetailWisata(),
-      };
 }

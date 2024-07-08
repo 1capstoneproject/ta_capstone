@@ -7,7 +7,7 @@ import 'package:ta_capstone/presentation/widget/cart_payment.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 import '../../../share/app_colors/colors.dart';
-import '../../controller/detail_paket_controller.dart';
+import '../../controller/detail_controller.dart';
 import '../../widget/button.dart';
 
 class Pembayaran extends StatelessWidget {

@@ -29,6 +29,7 @@ class SplashController extends GetxController {
       // ke home page, jika tidak maka kirim ke neraka.
       if(sharedPreferences.sessionApiKeys != ""){
         Get.offAllNamed(AppRoute.homescreen);
+        return;
       }
       Get.offAllNamed(AppRoute.onboarding);
     });

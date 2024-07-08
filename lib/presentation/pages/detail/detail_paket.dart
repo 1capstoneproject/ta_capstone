@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ta_capstone/presentation/controller/detail_paket_controller.dart';
+import 'package:ta_capstone/presentation/controller/detail_controller.dart';
 import 'package:ta_capstone/presentation/widget/icon_detail.dart';
 import 'package:ta_capstone/presentation/widget/text_detail.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 class DetailPaket extends StatefulWidget {
-  const DetailPaket({super.key});
+  
+  final int id;
+
+  const DetailPaket({
+    super.key,
+    required this.id,
+  });
+
 
   @override
   State<DetailPaket> createState() => _DetailPaketState();

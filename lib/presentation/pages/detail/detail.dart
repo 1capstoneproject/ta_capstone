@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/detail_controller.dart';
-import 'package:ta_capstone/presentation/widget/icon_detail.dart';
-import 'package:ta_capstone/presentation/widget/text_detail.dart';
-import 'package:ta_capstone/share/app_style/style.dart';
 
-class DetailWisata extends StatelessWidget {
-  const DetailWisata({super.key});
+class DetailScreen extends GetView<DetailPaketController> {
+
+  // final String title;
+
+  const DetailScreen({
+    super.key,
+    // required this.title,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    final DetailPaketController controller = Get.put(DetailPaketController());
-
+  Widget build(BuildContext context){
+    Get.put(DetailPaketController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          Get.arguments['nama'],
-          //'Detail Wisata',
-          style: titleLarge,
+          "Detail",
         ),
         leading: const BackButton(),
         backgroundColor: Colors.transparent,
@@ -35,20 +35,19 @@ class DetailWisata extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Obx(() => Container(
-                      width: MediaQuery.of(context).size.width * 0.9.sp,
-                      height: MediaQuery.of(context).size.height * 0.3.sp,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(controller
-                              .catPaket[controller.selectedImageIndex.value]),
-                          fit: BoxFit.fill,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    )),
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(controller.catPaket[controller.selectedImageIndex.value]),
+                      fit: BoxFit.fill,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                )),
                 const SizedBox(height: 10),
-                Container(
-                  height: 60.h,
+                Obx(() => Container(
+                  height: 60.sp,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: controller.catPaket.length,
@@ -62,14 +61,11 @@ class DetailWisata extends StatelessWidget {
                             vertical: 5,
                             horizontal: 5,
                           ),
-                          child: Container(
+                          child: Obx(() =>Container(
                             padding: const EdgeInsets.all(8),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                width:
-                                    index == controller.selectedImageIndex.value
-                                        ? 1
-                                        : 1,
+                                width: 1.w,
                                 color:
                                     index == controller.selectedImageIndex.value
                                         ? const Color(0xFF8BC342)
@@ -83,30 +79,46 @@ class DetailWisata extends StatelessWidget {
                               height: 50.h,
                               fit: BoxFit.fill,
                             ),
-                          ),
+                          )),
                         ),
                       );
                     },
                   ),
-                ),
-                const IconDetail(),
-                TextDetail(
-                  title: 'Informasi Detail',
-                  detail: '',
-                ),
-                TextDetail(
-                  title: 'Harap Diperhatikan',
-                  detail: '',
-                ),
-                TextDetail(
-                  title: 'Informasi Tambahan',
-                  detail: '',
-                ),
+                )),
+                // const IconDetail(),
+                // TextDetail(
+                //   title: 'Informasi Detail',
+                //   detail: 'P BANG ADA 100 GA ?',
+                // ),
+                // TextDetail(
+                //   title: 'Yang Termasuk dalam Paket Wisata',
+                //   detail: 'ADAA',
+                // ),
+                // TextDetail(
+                //   title: 'Harap Diperhatikan',
+                //   detail: 'MAU MINJEM 712 M',
+                // ),
+                // TextDetail(
+                //   title: 'Informasi Tambahan',
+                //   detail: '',
+                // ),
               ],
             ),
           ),
         ),
       ),
+      persistentFooterButtons: [
+        // Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: ButtonComponentDetail(
+        //     title: 'Beli Sekarang',
+        //     icon: const Icon(
+        //       Icons.shopping_bag_outlined,
+        //       color: Colors.white,
+        //     ),
+        //   ),
+        // ),
+      ],
     );
   }
 }

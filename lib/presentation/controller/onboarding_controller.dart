@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/service/services.dart';
-import 'package:ta_capstone/presentation/pages/dashboard/home_screen.dart';
+import 'package:ta_capstone/share/routes/route.dart';
 
 class OnboardingController extends GetxController {
   
@@ -24,6 +24,9 @@ class OnboardingController extends GetxController {
       // check response api
       if(response != null){
         // set sessions
+        prefs.sessionApiKeys = response["messages"];
+        // redirect ke dashboard
+        Get.offAllNamed(AppRoute.homescreen);
       }
       return;
     }

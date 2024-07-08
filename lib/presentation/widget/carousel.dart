@@ -5,13 +5,24 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import '../controller/homepage_controller.dart';
 
-class CarousleSlider extends StatelessWidget {
-  const CarousleSlider({
+class CarousleSlider extends StatefulWidget {
+
+  final List<String> bannerList;
+
+  final CarouselController carouselController = CarouselController();
+
+  CarousleSlider({
     super.key,
-    required this.controller,
+    required this.bannerList,
   });
 
-  final HomeController controller;
+  @override
+  State<CarousleSlider> createState() => _CarousleSliderState();
+}
+
+class _CarousleSliderState extends State<CarousleSlider> {
+
+  int current = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +36,8 @@ class CarousleSlider extends StatelessWidget {
               aspectRatio: 2.0.sp,
               viewportFraction: 1.sp,
               enlargeCenterPage: true,
-              onPageChanged: (index, reason) =>
-                  controller.current.value = index,
-            ),
-            items: controller.imgList
+              onPageChanged: (index, reason) => setState(() => current = index)),
+              items: widget.bannerList
                 .map((item) => SizedBox(
                       child: Container(
                         margin: const EdgeInsets.all(5.0),
@@ -37,37 +46,39 @@ class CarousleSlider extends StatelessWidget {
                               const BorderRadius.all(Radius.circular(5.0)),
                           child: Stack(
                             children: <Widget>[
-                              Image.asset(
-                                "assets/images/banner.png",
-                                fit: BoxFit.cover,
-                                alignment: Alignment.center,
-                                // width: 280.0,
-                                // height: 200,
-                                errorBuilder: (BuildContext context,
-                                    Object exception, StackTrace? stackTrace) {
-                                  return Container(
-                                    color: Colors.grey,
-                                    child: const Center(
-                                      child:
-                                          Icon(Icons.error, color: Colors.red),
-                                    ),
-                                  );
-                                },
-                              ),
-                              // Image.network(
-                              //   item,
+                              // Image.asset(
+                              //   "assets/images/banner.png",
                               //   fit: BoxFit.cover,
-                              //   width: 280.0,
-                              //   height: 200,
-                              //   errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                              //   alignment: Alignment.center,
+                              //   // width: 280.0,
+                              //   // height: 200,
+                              //   errorBuilder: (BuildContext context,
+                              //       Object exception, StackTrace? stackTrace) {
                               //     return Container(
                               //       color: Colors.grey,
                               //       child: const Center(
-                              //         child: Icon(Icons.error, color: Colors.red),
+                              //         child:
+                              //             Icon(Icons.error, color: Colors.red),
                               //       ),
                               //     );
                               //   },
                               // ),
+                              Image.network(
+                                item,
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                                width: 280.0,
+                                height: 200,
+                                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                                  print([item, exception]);
+                                  return Container(
+                                    color: Colors.grey,
+                                    child: const Center(
+                                      child: Icon(Icons.error, color: Colors.red),
+                                    ),
+                                  );
+                                },
+                              ),
 
                               // Positioned(
                               //  bottom: 0.0,
@@ -87,7 +98,7 @@ class CarousleSlider extends StatelessWidget {
                               //     padding: const EdgeInsets.symmetric(
                               //         vertical: 10.0, horizontal: 20.0),
                               //     child: Text(
-                              //       '${controller.imgList.indexOf(item)}',
+                              //       '${widget.bannerList.indexOf(item)}',
                               //       style: const TextStyle(
                               //         color: Colors.transparent,
                               //         fontSize: 20.0,
@@ -103,31 +114,30 @@ class CarousleSlider extends StatelessWidget {
                     ))
                 .toList(),
           ),
-          Obx(
-            () => Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: controller.imgList.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () =>
-                      controller.carouselController.animateToPage(entry.key),
-                  child: Container(
-                    width: 6.0.sp,
-                    height: 6.0.sp,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 4.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : AppColors.LightGreen400)
-                          .withOpacity(controller.current.value == entry.key
-                              ? 0.9
-                              : 0.4),
-                    ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: widget.bannerList.asMap().entries.map((entry) {
+              return GestureDetector(
+                onTap: () => setState((){
+                  widget.carouselController.animateToPage(entry.key);
+                }),
+                child: Container(
+                  width: 6.0.sp,
+                  height: 6.0.sp,
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 4.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : AppColors.LightGreen400)
+                        .withOpacity(current == entry.key
+                            ? 0.9
+                            : 0.4),
                   ),
-                );
-              }).toList(),
-            ),
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),

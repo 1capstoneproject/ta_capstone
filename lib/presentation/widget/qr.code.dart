@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:ta_capstone/presentation/controller/detail_paket_controller.dart';
+import 'package:ta_capstone/presentation/controller/detail_controller.dart';
 
 class QrCodeView extends StatelessWidget {
   @override
