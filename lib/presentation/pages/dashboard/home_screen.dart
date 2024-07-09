@@ -10,7 +10,6 @@ import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 class HomeScreen extends GetView<HomeController> {
-
   const HomeScreen({
     Key? key,
   }) : super(key: key);
@@ -62,72 +61,93 @@ class HomeScreen extends GetView<HomeController> {
                           style: titleMedium,
                         ),
                         SizedBox(
-                          height: 240.sp,
-                          child: Obx(() => ListView.builder(
-                            itemCount: controller.eventList.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              var event = controller.eventList[index];
-                              return CardWisata(
-                                id: event['id'],
-                                image: event['images_ids'].length == 0 ? "" : "${controller.api.endpoint}/storage/${event['images_ids'][0]['path']}",
-                                name: event['name']??"",
-                                price: NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0).format((event['price']as int)),
-                                location: event['location']??"",
-                                type: "Event",
-                              );
-                            },
-                          ),
-                        )),
+                            height: 240.sp,
+                            child: Obx(
+                              () => ListView.builder(
+                                itemCount: controller.eventList.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  var event = controller.eventList[index];
+                                  return CardWisata(
+                                    id: event['id'],
+                                    image: event['images_ids'].length == 0
+                                        ? ""
+                                        : "${controller.api.endpoint}/storage/${event['images_ids'][0]['path']}",
+                                    name: event['name'] ?? "",
+                                    price: NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format((event['price'] as int)),
+                                    location: event['location'] ?? "",
+                                    type: "Event",
+                                  );
+                                },
+                              ),
+                            )),
                         SizedBox(height: 8.h),
                         Text(
                           'Paket Wisata',
                           style: titleMedium,
                         ),
                         SizedBox(
-                          height: 180.h,
-                          child: Obx(() => ListView.builder(
-                            itemCount: controller.packageList.length,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                              var package = controller.packageList[index];
-                              return CardWisata(
-                                id: package['id'],
-                                image: package['images_ids'].length == 0 ? "" : "${controller.api.endpoint}/storage/${package['images_ids'][0]['path']}",
-                                name: package['name'],
-                                price: NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0).format((package['price']as int)),
-                                location: package['location'],
-                              );
-                            },
-                          ),
-                        )),
+                            height: 180.h,
+                            child: Obx(
+                              () => ListView.builder(
+                                itemCount: controller.packageList.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  var package = controller.packageList[index];
+                                  return CardWisata(
+                                    id: package['id'],
+                                    image: package['images_ids'].length == 0
+                                        ? ""
+                                        : "${controller.api.endpoint}/storage/${package['images_ids'][0]['path']}",
+                                    name: package['name'],
+                                    price: NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0)
+                                        .format((package['price'] as int)),
+                                    location: package['location'],
+                                  );
+                                },
+                              ),
+                            )),
                         const SizedBox(height: 7),
                         Text(
                           'Wisata Populer',
                           style: titleMedium,
                         ),
                         Obx(() => GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 2,
-                            childAspectRatio: 1 / 1.3,
-                          ),
-                          itemCount: controller.productList.length,
-                          itemBuilder: (context, index) {
-                            var popular = controller.packageList[index];
-                            return CardWisata(
-                              id: popular['id'],
-                              image: popular['images_ids'].length == 0 ? "" : "${controller.api.endpoint}/storage/${popular['images_ids'][0]['path']}",
-                              name: popular['name'],
-                              price: NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0).format((popular['price']as int)),
-                              location: popular['location'],
-                              type: "Populer",
-                            );
-                          },
-                        )),
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 8,
+                                crossAxisSpacing: 2,
+                                childAspectRatio: 1 / 1.3,
+                              ),
+                              itemCount: controller.productList.length,
+                              itemBuilder: (context, index) {
+                                var popular = controller.packageList[index];
+                                return CardWisata(
+                                  id: popular['id'],
+                                  image: popular['images_ids'].length == 0
+                                      ? ""
+                                      : "${controller.api.endpoint}/storage/${popular['images_ids'][0]['path']}",
+                                  name: popular['name'],
+                                  price: NumberFormat.currency(
+                                          locale: 'id',
+                                          symbol: 'Rp ',
+                                          decimalDigits: 0)
+                                      .format((popular['price'] as int)),
+                                  location: popular['location'],
+                                  type: "Populer",
+                                );
+                              },
+                            )),
                       ],
                     ),
                   ),
