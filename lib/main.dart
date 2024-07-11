@@ -4,11 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ta_capstone/service/services.dart';
 import 'package:ta_capstone/share/routes/route.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 void main() async {
   // wait for binding initialize
   WidgetsFlutterBinding.ensureInitialized();
-  // initialize firebase | cape cape ngerapiin auto format :()
+  // initialize firebase
   await Firebase.initializeApp(
     options: const FirebaseOptions(
       apiKey: 'AIzaSyB45kko7CZnachkE5gswZW_O5Be1sUwcDo',
@@ -24,6 +25,13 @@ void main() async {
 
   runApp(ScreenUtilInit(
     builder: (context, _) {
+      // global styling easyloading
+      EasyLoading.instance
+        ..dismissOnTap = false
+        ..loadingStyle = EasyLoadingStyle.dark
+        ..radius = 8.sp
+        ..maskType = EasyLoadingMaskType.black;
+      // mulai getx materialapp
       return GetMaterialApp(
         getPages: AppRoute.routes,
         debugShowCheckedModeBanner: false,
@@ -33,6 +41,7 @@ void main() async {
           useMaterial3: true,
         ),
         initialRoute: AppRoute.splashscreen,
+        builder: EasyLoading.init(),
       );
     },
   ));

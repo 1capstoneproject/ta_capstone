@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/presentation/controller/account_controller.dart';
 import 'package:ta_capstone/presentation/controller/homepage_controller.dart';
@@ -12,6 +13,7 @@ class NavigationController extends GetxController {
   late final KeranjangController keranjangC;
   late final AccountController accountC;
   final RxInt selectedIndex = 0.obs;
+  final PageController pageController = PageController();
 
   final screens = [
     HomeScreen(),

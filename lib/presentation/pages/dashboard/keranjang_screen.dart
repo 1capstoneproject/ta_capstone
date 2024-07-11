@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:ta_capstone/presentation/controller/transaction_controller.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
-class KeranjangScreen extends StatelessWidget {
+class KeranjangScreen extends GetView<KeranjangController> {
+
   const KeranjangScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-    );
+    Get.put(KeranjangController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -20,51 +23,92 @@ class KeranjangScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Card(
-          margin: EdgeInsets.all(10),
-          elevation: 7,
+      body: RefreshIndicator.adaptive(
+        onRefresh: controller.fetchAllTransaction,
+        child: SingleChildScrollView(
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(7),
+            constraints: BoxConstraints(
+              minHeight: 1.sh,
+              minWidth: 1.sw,
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(7),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 100.w,
-                    height: 100.h,
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      image: DecorationImage(
-                        image: NetworkImage(''),
-                        fit: BoxFit.fill,
+            child: Obx(() => ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.transaction.length,
+              itemBuilder: (context, index){
+                var transaction = controller.transaction[index];
+                return Slidable(
+                  endActionPane: ActionPane(
+                    motion: ScrollMotion(),
+                    children: [
+                      SlidableAction(
+                        onPressed: (_) async {
+                          await controller.actionDeleteTransaction(transaction["id"]);
+                        },
+                        label: "Hapus",
+                        icon: Icons.delete,
+                        backgroundColor: Colors.red,
                       ),
-                      borderRadius: BorderRadius.circular(5),
+                    ],
+                  ),
+                  child: GestureDetector(
+                    onTap: () async {
+                      await Get.to(() => DaftarTiket(
+                        data: transaction,
+                      ), arguments: transaction);
+                      await controller.fetchAllTransaction();
+                    },
+                    child: Card(
+                      margin: EdgeInsets.all(10),
+                      elevation: .8.sp,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(7),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 100.w,
+                                height: 100.h,
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      transaction["product"]["images_ids"].length == 0 ? "" : "${controller.api.endpoint}/storage/${transaction['product']['images_ids'][0]['path']}",
+                                    ),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 5,
+                                  ),
+                                  child: CartKeranjang(
+                                    id: transaction["code"],
+                                    title: transaction["product"]["name"].toString(),
+                                    price: NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0).format((transaction['total']as int)),
+                                    status: transaction["status"]??"", // Update this value to test different statuses
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      child: CartKeranjang(
-                        id: 'ID123456',
-                        title: 'Title',
-                        price: 'Price',
-                        status:
-                            'menunggu', // Update this value to test different statuses
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+                );
+              },
+            )),
+          )
         ),
       ),
     );
@@ -90,18 +134,47 @@ class CartKeranjang extends StatelessWidget {
     // Determine status text color based on the status value
     Color statusColor;
     switch (status) {
-      case 'menunggu':
+      case 'inprogress':
         statusColor = AppColors.Warming500;
         break;
-      case 'belum bayar':
+      case 'cancel':
         statusColor = AppColors.Red500;
         break;
-      case 'sukses':
+      case 'refund':
+        statusColor = AppColors.Red500;
+        break;
+      case 'paid':
+        statusColor = AppColors.Green500;
+        break;
+      case 'done':
         statusColor = AppColors.Green500;
         break;
       default:
         statusColor = Colors.grey;
     }
+    String statusText  = "";
+    switch (status) {
+      case 'inprogress':
+        statusText = "Menunggu Pembayaran";
+        break;
+      case 'cancel':
+        statusText = "Batal";
+        break;
+      case 'refund':
+        statusText = "Refund";
+        break;
+      case 'paid':
+        statusText = "Sudah Di bayar";
+        break;
+      case 'done':
+        statusText = "Selesai";
+        break;
+      case 'draft':
+        statusText = "Whistlist";
+      default:
+        statusColor = Colors.grey;
+    }
+
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,7 +200,7 @@ class CartKeranjang extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Text(
-            status,
+            statusText,
             style: labelSmall.copyWith(color: statusColor),
           ),
         ),

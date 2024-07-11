@@ -1,4 +1,6 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
 import 'package:ta_capstone/presentation/pages/dashboard/keranjang_screen.dart';
 import 'package:ta_capstone/service/services.dart';
@@ -8,7 +10,7 @@ class DetailPaketController extends GetxController {
   final SharedPreferencesService prefs = Get.put(SharedPreferencesService());
   final ApiServices api = Get.put(ApiServices());
 
-  var selectedImageIndex = 0.obs;
+  final RxInt selectedImageIndex = 0.obs;
   final RxInt productId = 0.obs;
 
   final RxString productName = "".obs;
@@ -16,6 +18,9 @@ class DetailPaketController extends GetxController {
   final RxString productPrice = "".obs;
   final RxString productLocation = "".obs;
   final RxString productLongDescription = "".obs;
+  final RxMap<String, dynamic> tourism = <String, dynamic>{}.obs;
+  final RxList<dynamic> otherProduct = <dynamic>[].obs;
+  final RxMap<String, dynamic> globalData = <String, dynamic>{}.obs;
 
   final RxList<dynamic> catPaket = <dynamic>[
     "https://static-00.iconduck.com/assets.00/no-image-icon-2048x2048-2t5cx953.png",
@@ -26,30 +31,76 @@ class DetailPaketController extends GetxController {
   ].obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    EasyLoading.show();
     productId.value = Get.arguments["id"];
-    fetchDetail();
+    await fetchDetail();
+    EasyLoading.dismiss();
   }
 
   // fetch data dari API
   Future<void> fetchDetail() async {
     var detail = await api.getDetail(id: productId.value);
-    Get.printInfo(info: detail.toString());
+    if(detail is bool){
+      return;
+    }
+    detail = detail["data"];
+    var images = [];
+    for(var image in detail['images_ids']){
+      images.add("${api.endpoint}/storage/${image["path"]}");
+    }
+    globalData.value = detail as Map<String, dynamic>;
+    catPaket.value = images;
+    productName.value = detail['name'];
+    productDescription.value = detail['description'];
+    productPrice.value = NumberFormat.currency(locale: 'id', symbol: 'Rp ', decimalDigits: 0).format((detail['price']as int));
+    productLocation.value = detail['location'];
+    productLongDescription.value = detail['description_details'];
+    tourism.value = detail['user'];
+    otherProduct.value = detail['other_product'];
   }
 
-  void handlePrimaryButtonPress() {
-    Get.to(() => DaftarTiket());
-    print("Primary button pressed");
+  Future<void> tambahKeranjang() async {
+    // buat transaksi baru dengan status draft
+    EasyLoading.show();
+    // check data global 
+    if(globalData.isEmpty){
+      EasyLoading.showError("Error bang data product detail kosong");
+      return;
+    }
+    await api.createTransaction(
+      prefs.sessionApiKeys,
+      productId: globalData["id"],
+      tourismId: tourism["id"],
+      userId: prefs.userInfo["id"],
+      quantity: 1,
+      price: globalData["price"],
+      total: globalData["price"] * 1,
+    );
+    EasyLoading.showSuccess("Berhasil menambah ke keranjang");
   }
 
-  void handleSecondaryButtonPress() {
-    Get.to(() => KeranjangScreen());
-    print("Secondary button pressed");
-  }
-
-  void terapkan() {
-    print("Tombol Terapkan");
+  Future<void> checkout() async {
+  // buat transaksi baru dengan status draft
+    EasyLoading.show();
+    // check data global 
+    if(globalData.isEmpty){
+      EasyLoading.showError("Error bang data product detail kosong");
+      return;
+    }
+    dynamic response = await api.createTransaction(
+      prefs.sessionApiKeys,
+      productId: globalData["id"],
+      tourismId: tourism["id"],
+      userId: prefs.userInfo["id"],
+      quantity: 1,
+      price: globalData["price"],
+      total: globalData["price"] * 1,
+    );
+    EasyLoading.dismiss();
+    Get.printInfo(info: response["data"].toString());
+    Get.off(() => DaftarTiket(data: response['data']), arguments: response['data']);
   }
 
   //qr.code

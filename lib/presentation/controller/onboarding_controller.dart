@@ -25,6 +25,10 @@ class OnboardingController extends GetxController {
       if(response != null){
         // set sessions
         prefs.sessionApiKeys = response["messages"];
+        var isValid = await api.validate(token: prefs.sessionApiKeys);
+        // save session valid ke sharedpreference
+        // katanya biar hemat request.
+        prefs.userInfo = isValid["data"];
         // redirect ke dashboard
         Get.offAllNamed(AppRoute.homescreen);
       }

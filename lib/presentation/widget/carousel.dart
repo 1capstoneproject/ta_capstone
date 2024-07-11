@@ -70,7 +70,6 @@ class _CarousleSliderState extends State<CarousleSlider> {
                                 width: 280.0,
                                 height: 200,
                                 errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                                  print([item, exception]);
                                   return Container(
                                     color: Colors.grey,
                                     child: const Center(

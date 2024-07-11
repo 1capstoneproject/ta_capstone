@@ -5,7 +5,7 @@ import 'package:ta_capstone/share/routes/route.dart';
 
 class SplashController extends GetxController {
   
-  final SharedPreferencesService sharedPreferences = Get.find<SharedPreferencesService>();
+  final SharedPreferencesService prefs = Get.find<SharedPreferencesService>();
   final ApiServices apiServices = Get.find<ApiServices>();
 
   @override
@@ -24,10 +24,25 @@ class SplashController extends GetxController {
       ));
     }
 
-    await Future.delayed(Duration(milliseconds: 500), (){
+    await Future.delayed(Duration(milliseconds: 500), () async {
       // check login user ketika userid itu ada dan session googleid ada maka redirect
       // ke home page, jika tidak maka kirim ke neraka.
-      if(sharedPreferences.sessionApiKeys != ""){
+      if(prefs.sessionApiKeys != ""){
+        
+        // validasi ulang apakah token masih bisa di gunakan atau tidak
+        var isValid = await apiServices.validate(token: prefs.sessionApiKeys);
+        if(isValid is bool) {
+          // clear all sessions
+          await prefs.deleteSession();
+          // redirect to onboard pages
+          Get.offAllNamed(AppRoute.onboarding);
+          return;
+        }
+        
+        // save session valid ke sharedpreference
+        // katanya biar hemat request.
+        prefs.userInfo = isValid["data"];
+
         Get.offAllNamed(AppRoute.homescreen);
         return;
       }

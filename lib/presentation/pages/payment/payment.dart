@@ -242,7 +242,7 @@ class ButtonTotal extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           GestureDetector(
-            onTap: controller.terapkan,
+            // onTap: controller.terapkan,
             child: Container(
               width: (MediaQuery.of(context).size.width - 60) / 3.5,
               height: 54,

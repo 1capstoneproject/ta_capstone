@@ -10,10 +10,6 @@ class NavigationView extends GetView<NavigationController> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-    );
     Get.put(NavigationController());
     return Scaffold(
       bottomNavigationBar: Obx(
@@ -39,12 +35,17 @@ class NavigationView extends GetView<NavigationController> {
           currentIndex: controller.selectedIndex.value,
           onTap: (val) {
             controller.selectedIndex.value = val;
-            print(val);
+            controller.pageController.jumpToPage(val);
           },
         ),
       ),
-      body: Obx(
-        () => controller.screens[controller.selectedIndex.value],
+      body: PageView(
+        controller: controller.pageController,
+        children: controller.screens,
+        onPageChanged: (index){
+          controller.selectedIndex.value = index;
+          controller.pageController.jumpToPage(index);
+        },
       ),
     );
   }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ta_capstone/presentation/pages/detail/detail_paket.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 import 'package:ta_capstone/share/routes/route.dart';
@@ -26,7 +25,7 @@ class CardWisata extends StatelessWidget {
     required this.price,
     required this.location,
     required this.id,
-    this.type = "Wisata",
+    this.type = "",
   });
 
   @override
@@ -61,32 +60,35 @@ class CardWisata extends StatelessWidget {
                             image: NetworkImage(image == "" ? "https://static-00.iconduck.com/assets.00/no-image-icon-2048x2048-2t5cx953.png" : image),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.circular(5)),
-                    child: Stack(
-                      alignment: Alignment.topRight,
-                      children: [
-                        ClipPath(
-                          clipper: EventCliper(),
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            color: Colors.orange,
+                    child: Visibility(
+                      visible: type != "",
+                      child: Stack(
+                        alignment: Alignment.topRight,
+                        children: [
+                          ClipPath(
+                            clipper: EventCliper(),
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              color: Colors.orange,
+                            ),
                           ),
-                        ),
-                        Positioned(
-                          top: 13,
-                          right: 2.5,
-                          child: Transform.rotate(
-                              angle: 50 * pi / 180,
-                              child: Text(
-                                type,
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )),
-                        )
-                      ],
+                          Positioned(
+                            top: 13,
+                            right: 2.5,
+                            child: Transform.rotate(
+                                angle: 50 * pi / 180,
+                                child: Text(
+                                  type,
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
