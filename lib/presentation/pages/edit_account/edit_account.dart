@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:ta_capstone/presentation/pages/dashboard/navigation.dart';
+import 'package:ta_capstone/presentation/controller/account_edit_controller.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:intl_phone_field/intl_phone_field.dart'; // Import intl_phone_field package
-import '../../controller/account_controller.dart';
 
 // Assuming the file path to AccountScreen
 
-class EditAccountScreen extends StatelessWidget {
-  final AccountController accountController = Get.find();
+class EditAccountScreen extends GetView<AccountEditController> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-    );
+    Get.put(AccountEditController());
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -28,17 +23,7 @@ class EditAccountScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: Icon(Icons.data_saver_on),
-            onPressed: () {
-              // Save changes to controller when save button is pressed
-              accountController.updateAccountInfo(
-                fullName: accountController.fullNameController.text,
-                phone: accountController.phoneController.text,
-                email: accountController.emailController.text,
-                address: accountController.addressController.text,
-              );
-              // Navigate back to AccountScreen
-              Get.to(() => NavigationView());
-            },
+            onPressed: controller.updateAccountInfo,
           ),
         ],
       ),
@@ -54,8 +39,8 @@ class EditAccountScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50.sp,
-                      backgroundImage: accountController.image.value != null
-                          ? FileImage(accountController.image.value!)
+                      backgroundImage: controller.image.value != null
+                          ? FileImage(controller.image.value!)
                           : AssetImage('assets/images/profil.png')
                               as ImageProvider,
                     ),
@@ -74,7 +59,7 @@ class EditAccountScreen extends StatelessWidget {
                           icon: Icon(
                             Icons.camera_alt,
                           ),
-                          onPressed: accountController.pickImage,
+                          onPressed: controller.pickImage,
                         ),
                       ),
                     ),
@@ -82,26 +67,38 @@ class EditAccountScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Nama Lengkap',
-                    style: titleSmall,
-                  ),
-                  SizedBox(height: 8),
-                  TextFormField(
-                    controller: accountController.fullNameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: AppColors.LightGreen400,
+              Form(
+                key: controller.usersEditForm,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Nama Lengkap',
+                      style: titleSmall,
+                    ),
+                    SizedBox(height: 8),
+                    TextFormField(
+                      controller: controller.fullNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.LightGreen400,
+                          ),
                         ),
                       ),
+                      style: bodySmall,
+                      validator: (value){
+                        if(value == null){
+                          return "Nama lengkap tidak boleh kosong.";
+                        }
+                        if(value.isEmpty){
+                          return "Nama lengkap tidak boleh kosong";
+                        }
+                        return null;
+                      }
                     ),
-                    style: bodySmall,
-                  ),
-                ],
+                  ],
+                ),
               ),
               SizedBox(height: 20),
               Column(
@@ -113,7 +110,7 @@ class EditAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   IntlPhoneField(
-                    controller: accountController.phoneController,
+                    controller: controller.phoneController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -128,6 +125,18 @@ class EditAccountScreen extends StatelessWidget {
                           .completeNumber); // Print the complete phone number
                     },
                     style: bodySmall,
+                    validator: (value){
+                      if(value != null){
+                        return "Nomer telepon tidak boleh kosong.";
+                      }
+                      if(!value!.isValidNumber()){
+                        return "Nomer telepon tidak valid";
+                      }
+                      if(!value.number.isEmpty){
+                        return "Nomer telepon tidak boleh kosong";
+                      }
+                      return null;
+                    }
                   ),
                 ],
               ),
@@ -141,7 +150,7 @@ class EditAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   TextFormField(
-                    controller: accountController.emailController,
+                    controller: controller.emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -150,6 +159,7 @@ class EditAccountScreen extends StatelessWidget {
                       ),
                     ),
                     style: bodySmall,
+                    readOnly: true,
                   ),
                 ],
               ),
@@ -163,7 +173,7 @@ class EditAccountScreen extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   TextFormField(
-                    controller: accountController.addressController,
+                    controller: controller.addressController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(
@@ -172,6 +182,15 @@ class EditAccountScreen extends StatelessWidget {
                       ),
                     ),
                     style: bodySmall,
+                    validator: (value){
+                      if(value == null){
+                        return "Alamat tidak boleh kosong";
+                      }
+                      if(value.isEmpty){
+                        return "Alamat tidak boleh kosong";
+                      }
+                      return null;
+                    }
                   ),
                 ],
               ),

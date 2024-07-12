@@ -2,8 +2,8 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
-import 'package:ta_capstone/presentation/pages/dashboard/keranjang_screen.dart';
 import 'package:ta_capstone/service/services.dart';
+import 'package:ta_capstone/share/routes/route.dart';
 
 class DetailPaketController extends GetxController {
   
@@ -69,6 +69,11 @@ class DetailPaketController extends GetxController {
       EasyLoading.showError("Error bang data product detail kosong");
       return;
     }
+    if(prefs.userInfo.isEmpty){
+      EasyLoading.dismiss();
+      Get.offAndToNamed(AppRoute.onboarding);
+      return;
+    }
     await api.createTransaction(
       prefs.sessionApiKeys,
       productId: globalData["id"],
@@ -87,6 +92,11 @@ class DetailPaketController extends GetxController {
     // check data global 
     if(globalData.isEmpty){
       EasyLoading.showError("Error bang data product detail kosong");
+      return;
+    }
+    if(prefs.userInfo.isEmpty){
+      EasyLoading.dismiss();
+      Get.offAndToNamed(AppRoute.onboarding);
       return;
     }
     dynamic response = await api.createTransaction(

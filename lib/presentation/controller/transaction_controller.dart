@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:ta_capstone/service/services.dart';
+import 'package:ta_capstone/share/routes/route.dart';
 
 class KeranjangController extends GetxController {
   
@@ -54,9 +55,14 @@ class KeranjangController extends GetxController {
 
   @override
   void onInit() async {
-    EasyLoading.show();
-    await fetchAllTransaction();
-    EasyLoading.dismiss();
     super.onInit();
+    EasyLoading.show();
+    if(prefs.sessionApiKeys != "") {
+      // EasyLoading.dismiss();
+      // Get.offAndToNamed(AppRoute.onboarding);
+      await fetchAllTransaction();
+    }
+    
+    EasyLoading.dismiss();
   }
 }

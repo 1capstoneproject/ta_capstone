@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -24,7 +25,12 @@ class KeranjangScreen extends GetView<KeranjangController> {
         centerTitle: true,
       ),
       body: RefreshIndicator.adaptive(
-        onRefresh: controller.fetchAllTransaction,
+        onRefresh: () async {
+          if(controller.prefs.userInfo.isNotEmpty){
+            await controller.fetchAllTransaction();
+          }
+          EasyLoading.showError("Silakan login untuk melihat transaksi");
+        },
         child: SingleChildScrollView(
           child: Container(
             constraints: BoxConstraints(

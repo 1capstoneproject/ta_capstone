@@ -6,15 +6,11 @@ import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 import '../../controller/account_controller.dart';
 
-class AccountScreen extends StatelessWidget {
-  final AccountController accountController = Get.put(AccountController());
+class AccountScreen extends GetView<AccountController> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-      context,
-      designSize: const Size(360, 690),
-    );
+    Get.put(AccountController());
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -30,8 +26,11 @@ class AccountScreen extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               Get.to(() => EditAccountScreen());
+              Get.delete<AccountController>(force: true);
+              Get.put(AccountController());
+
             },
             icon: Icon(Icons.settings),
           ),
@@ -44,62 +43,66 @@ class AccountScreen extends StatelessWidget {
         ),
         children: [
           Center(
-            child: Obx(() {
-              return Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 50.sp,
-                    backgroundImage: accountController.image.value != null
-                        ? FileImage(accountController.image.value!)
-                        : AssetImage('assets/images/profil.png')
-                            as ImageProvider,
-                  ),
-                ],
-              );
-            }),
+            child: Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                CircleAvatar(
+                  radius: 50.sp,
+                  backgroundImage: controller.prefs.userInfo['profile'] == null
+                      ? AssetImage('assets/images/profil.png') as ImageProvider
+                      : NetworkImage(
+                        (controller.prefs.userInfo['profile'] as String).startsWith("https://") ?
+                        (controller.prefs.userInfo['profile'] as String) :
+                        "${controller.api.endpoint}${controller.prefs.userInfo['profile']}",
+                      ) as ImageProvider,
+                ),
+              ],
+            ),
           ),
           SizedBox(height: 10),
           Center(
             child: Text(
-              '${accountController.fullName}',
+              controller.prefs.userInfo['name']??"Silakan login",
               style: titleMedium,
             ),
           ),
           SizedBox(height: 20),
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ContactInfo(
-                  label: 'Nomor Telepon',
-                  icon: Icons.phone,
-                  text: '${accountController.phoneNumber}',
-                ),
-                ContactInfo(
-                  label: 'Email',
-                  icon: Icons.email,
-                  text: '${accountController.email}',
-                ),
-                ContactInfo(
-                  label: 'Alamat',
-                  icon: Icons.home,
-                  text: '${accountController.address}',
-                ),
-              ],
+          Visibility(
+            visible: controller.prefs.userInfo.isNotEmpty,
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ContactInfo(
+                    label: 'Nomor Telepon',
+                    icon: Icons.phone,
+                    text: '${controller.prefs.userInfo['phone']??''}',
+                  ),
+                  ContactInfo(
+                    label: 'Email',
+                    icon: Icons.email,
+                    text: '${controller.prefs.userInfo['email']}',
+                  ),
+                  ContactInfo(
+                    label: 'Alamat',
+                    icon: Icons.home,
+                    text: '${controller.prefs.userInfo['address']}',
+                  ),
+                ],
+              ),
             ),
           ),
         ],

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -299,7 +302,49 @@ class ApiServices extends GetxService {
   // @ENDREGION
 
   // @REGION: USER API CONSUMER
-  Future<dynamic> updateUser() async {}
+  Future<dynamic> updateUser(
+    String token, 
+    int id,
+    {
+      String? fullName,
+      String? phone,
+      String? email,
+      String? address,
+      File? profile,
+    }
+  ) async {
+    try {
+      var file = "";
+      // ubah file ke base64
+      if(profile!=null){
+        List<int> fileByte = await profile.readAsBytes();
+        file = base64Encode(fileByte);
+      }
+      var response = await dio.post(
+        "/api/private/user/edit/$id",
+        data: {
+          'name': fullName,
+          'phone': phone,
+          'email': email,
+          'address': address,
+          'profile': file,
+        },
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token",
+            "Content-Type": "application/json"
+          }
+        ),
+      );
+      return response.data;
+    } on DioException catch(e){
+      Get.printInfo(info: e.toString());
+      return false;
+    }catch(e){
+      Get.printInfo(info: e.toString());
+      return false;
+    }
+  }
 
   Future<dynamic> requestDelete() async {}
   // @ENDREGION
