@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 class ApiServices extends GetxService {
 
   // base url
-  final String endpoint = "https://mouse-capable-entirely.ngrok-free.app";
+  final String endpoint = "https://dashboard.desaedelweisswonokitri.com";
 
   // local a
   // final String endpoint = "http://192.168.86.81:8000";
@@ -88,8 +89,19 @@ class ApiServices extends GetxService {
   // fungsi untuk check konektifitas ke server
   Future<bool> ping() async {
     try {
-      await dio.get("/api");
+      await dio.get("/api",
+        options: Options(
+          headers: {
+            "Content-Type": "application/json",
+          }
+        )
+      );
       return true;
+     
+    } on DioException catch(e) {
+      Get.printError(info: e.requestOptions.baseUrl.toString());
+      Get.printError(info: e.response.toString());
+      return false;
     } catch (e) {
       Get.printError(info: e.toString());
       return false;
@@ -103,6 +115,7 @@ class ApiServices extends GetxService {
       return response.data;
     }catch(e){
       Get.printError(info: e.toString());
+      debugPrint(e.toString());
       return false;
     }
   }

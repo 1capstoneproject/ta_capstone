@@ -28,6 +28,7 @@ class KeranjangScreen extends GetView<KeranjangController> {
         onRefresh: () async {
           if(controller.prefs.userInfo.isNotEmpty){
             await controller.fetchAllTransaction();
+            return;
           }
           EasyLoading.showError("Silakan login untuk melihat transaksi");
         },
@@ -152,6 +153,12 @@ class CartKeranjang extends StatelessWidget {
       case 'paid':
         statusColor = AppColors.Green500;
         break;
+      case 'checkin':
+        statusColor = Colors.blue;
+        break;
+      case 'onprogress':
+        statusColor = Colors.blue;
+        break;
       case 'done':
         statusColor = AppColors.Green500;
         break;
@@ -177,8 +184,12 @@ class CartKeranjang extends StatelessWidget {
         break;
       case 'draft':
         statusText = "Whistlist";
+      case 'checkin':
+        statusText = "Checkin";
+      case 'onprogress':
+        statusText = "Sedang Berlibur";
       default:
-        statusColor = Colors.grey;
+        statusText = "Tidak di ketahui";
     }
 
 
