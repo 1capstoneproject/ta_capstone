@@ -34,6 +34,13 @@ class AccountScreen extends GetView<AccountController> {
             },
             icon: Icon(Icons.settings),
           ),
+          IconButton(
+            onPressed: () async {
+              await controller.prefs.deleteSession();
+              Get.offAndToNamed("/");
+            },
+            icon: Icon(Icons.logout),
+          )
         ],
       ),
       body: ListView(
