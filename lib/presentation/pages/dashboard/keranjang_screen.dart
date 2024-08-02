@@ -6,12 +6,18 @@ import 'package:intl/intl.dart';
 import 'package:ta_capstone/presentation/controller/transaction_controller.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ta_capstone/presentation/pages/check_out/checkout_paket.dart';
+import 'package:ta_capstone/presentation/pages/ticket/cetak_tiket.dart';
 import 'package:ta_capstone/share/app_colors/colors.dart';
 import 'package:ta_capstone/share/app_style/style.dart';
 
 class KeranjangScreen extends GetView<KeranjangController> {
 
-  const KeranjangScreen({super.key});
+  final String? image;
+
+  const KeranjangScreen({
+    super.key,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -60,10 +66,21 @@ class KeranjangScreen extends GetView<KeranjangController> {
                   ),
                   child: GestureDetector(
                     onTap: () async {
-                      await Get.to(() => DaftarTiket(
-                        data: transaction,
-                      ), arguments: transaction);
-                      await controller.fetchAllTransaction();
+                      Get.printInfo(info: transaction.toString());
+                      if(["draft", "inprogress"].contains(transaction['status'])){
+                        await Get.to(() => DaftarTiket(
+                          data: transaction,
+                        ), arguments: transaction);
+                        await controller.fetchAllTransaction();
+                      }else if(["paid", "onprogress", "done", "checkin"].contains(transaction['status'])){
+                        // EasyLoading.dismiss();
+                        Get.to(() => CetakTiket(
+                          data: transaction,
+                        ));
+                        await controller.fetchAllTransaction();
+                      }else{
+                        // do nothing when status is cancel or refund
+                      }
                     },
                     child: Card(
                       margin: EdgeInsets.all(10),

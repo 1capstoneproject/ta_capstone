@@ -11,6 +11,7 @@ class AccountScreen extends GetView<AccountController> {
   @override
   Widget build(BuildContext context) {
     Get.put(AccountController());
+    Get.printInfo(info: "${controller.api.endpoint}${controller.prefs.userInfo['profile']}");
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

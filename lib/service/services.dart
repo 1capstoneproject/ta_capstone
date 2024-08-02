@@ -19,6 +19,9 @@ import './auth_service.dart';
 export './midtrans_service.dart';
 import './midtrans_service.dart';
 
+export './notification_service.dart';
+import './notification_service.dart';
+
 Future<void> initServices() async {
   // initialize services
   Get.printInfo(info: "Initialize services");
@@ -26,5 +29,6 @@ Future<void> initServices() async {
   await Get.putAsync(() => ApiServices().init());
   await Get.putAsync(() => AuthService().init());
   await Get.putAsync(() => MidtransServices().init());
+  await Get.putAsync(() => NotificationService().init());
   Get.printInfo(info: "Success initialize service");
 }

@@ -42,7 +42,6 @@ class Ticketing extends StatelessWidget {
                 style: bodySmallGrey,
               ),
             ),
-            QrCodeView(),
             Padding(
               padding: const EdgeInsets.only(
                 left: 25,
@@ -82,9 +81,7 @@ class Ticketing extends StatelessWidget {
           child: ButtonComponent(
             title: 'Cek Status',
             onPressed: () {
-              Get.to(
-                () => CetakTiket(),
-              );
+              
             },
           ),
         ),

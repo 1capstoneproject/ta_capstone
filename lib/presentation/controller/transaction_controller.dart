@@ -61,6 +61,9 @@ class KeranjangController extends GetxController {
       // EasyLoading.dismiss();
       // Get.offAndToNamed(AppRoute.onboarding);
       await fetchAllTransaction();
+      EasyLoading.dismiss();
+    }else{
+      EasyLoading.showError("Silakan masuk untuk melanjutkan.");
     }
     
     EasyLoading.dismiss();
