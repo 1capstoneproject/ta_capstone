@@ -135,8 +135,8 @@ class TicketData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime? dateOrder = DateTime.tryParse(data['date']);
-    DateTime? eventDate = DateTime.tryParse(data['product']['event_date']);
+    DateTime? dateOrder = DateTime.tryParse(data['date'].toString());
+    DateTime? eventDate = DateTime.tryParse(data['product']['event_date'].toString());
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -147,12 +147,12 @@ class TicketData extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  data['product']['name'],
+                  data['product']['name'].toString(),
                   style: titleLarge,
                 ),
                 SizedBox(height: 4.sp),
                 Text(
-                  data['code'],
+                  data['code'].toString(),
                   style: bodySmallGrey,
                 ),
               ],
@@ -199,7 +199,7 @@ class TicketData extends StatelessWidget {
               style: bodySmallGrey,
             ),
             Text(
-              data["contact_name"],
+              data["contact_name"].toString(),
               style: bodyMedium,
             ),
           ],

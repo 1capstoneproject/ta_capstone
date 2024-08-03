@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -70,12 +71,48 @@ class CheckoutController extends GetxController {
           showPaymentStatus: true,
           skipCustomerDetailsPages: true,
         );
+        midtrans.sdk.setTransactionFinishedCallback((result) async {
+          if(result.statusMessage != null && result.statusMessage!.contains("Success")){
+            AwesomeNotifications().createNotification(
+              content: NotificationContent(
+                id: 10,
+                channelKey: "payment_status",
+                actionType: ActionType.Default,
+                title: "Notifikasi Pembayaran",
+                body: "Pembelian ${data['product']['name']} telah berhasil"
+              )
+            );
+          }
+        });
         await midtrans.sdk.startPaymentUiFlow(token: response['data']['token']);
         // crosscheck paymen
+        // dan send notifikasi pembayaran jika sukses atau berhasil.
         EasyLoading.dismiss();
         Get.back();
       };
     }
     return (){};
+  }
+
+  Future<void> statusChange(int txId, String lastStatus) async {
+    dynamic transaction = await api.allTransaction(token: prefs.sessionApiKeys);
+    dynamic currentTransaction = (transaction as List).firstWhere((i) => i["id"] == txId);
+    // check if change
+    if(lastStatus != currentTransaction){
+      if(lastStatus == "paid"){
+        AwesomeNotifications().createNotification(
+          content: NotificationContent(
+            id: DateTime.now().millisecondsSinceEpoch,
+            channelKey: "payment_status",
+            actionType: ActionType.Default,
+            title: "Pembayaran berhasil",
+            body: """Pembayaran produk wisata ${currentTransaction['product']['name']} berhasil.
+""",
+            displayOnBackground: true,
+            displayOnForeground: true,
+          )
+        );
+      }
+    }
   }
 }

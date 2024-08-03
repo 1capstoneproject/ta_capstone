@@ -37,13 +37,13 @@ class EditAccountScreen extends GetView<AccountEditController> {
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    CircleAvatar(
+                    Obx(() => CircleAvatar(
                       radius: 50.sp,
                       backgroundImage: controller.image.value != null
                           ? FileImage(controller.image.value!)
                           : AssetImage('assets/images/profil.png')
                               as ImageProvider,
-                    ),
+                    )),
                     Positioned(
                       bottom: 5,
                       right: 5,

@@ -5,7 +5,7 @@ class NotificationService extends GetxService {
 
   Future<NotificationService> init() async {
     Get.printInfo(info: "Start notification services");
-    AwesomeNotifications().initialize(
+    await AwesomeNotifications().initialize(
       null,
       [
         NotificationChannel(
@@ -18,7 +18,7 @@ class NotificationService extends GetxService {
       debug: true,
     );
     // get permission
-    AwesomeNotifications().isNotificationAllowed().then((isAllowed){
+    await AwesomeNotifications().isNotificationAllowed().then((isAllowed){
       if(!isAllowed){
         AwesomeNotifications().requestPermissionToSendNotifications();
       }
